@@ -1,12 +1,14 @@
 { pkgs, ... }:
 
 {
-  system.stateVersion = 6;
+  system.stateVersion = 5;
   system.primaryUser = "{user}";
   nixpkgs.config.allowUnfree = true;
 
   # Nix settings
-  nix.enable = false;
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+  };
   nix.extraOptions = ''
     extra-platforms = x86_64-darwin aarch64-darwin
   '';

@@ -25,7 +25,6 @@
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
-    theme = "everforest";
   };
 
   # XDG Portal for screen sharing
@@ -105,5 +104,5 @@
     victor-mono
   ];
 
-  system.stateVersion = "25.05";
+  system.stateVersion = "24.11";
 }
