@@ -772,6 +772,9 @@ set -g window-status-current-format "#[fg=#2d353b,bg=#a7c080]#[fg=#2d353b,bg=#a7
     enable = true;
     musicDirectory = "${config.home.homeDirectory}/Music";
     extraConfig = ''
+      bind_to_address "127.0.0.1"
+      port "6601"
+      
       audio_output {
         type "pipewire"
         name "PipeWire Output"
@@ -786,7 +789,7 @@ set -g window-status-current-format "#[fg=#2d353b,bg=#a7c080]#[fg=#2d353b,bg=#a7
     enable = true;
     config = ''
       (
-        address: "127.0.0.1:6600",
+        address: "127.0.0.1:6601",
         theme: Some((
           background_color: None,
           text_color: Some("#d3c6aa"),
