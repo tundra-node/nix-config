@@ -8,8 +8,15 @@ result
 result-*
 *.backup
 
+# Secrets
+*.key
+*.pem
+secrets/
+/root/
+
+
 # NixOS hardware configuration (system-specific)
-hosts/nixos/hardware-configuration.nix
+hosts/*/hardware-configuration.nix
 
 # ./flake.lock
 
