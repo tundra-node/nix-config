@@ -10,6 +10,9 @@
     ../../modules/nixos/terminal.nix
   ];
 
+  # Required for standalone Home Manager (not set by a NixOS module)
+  home.username = "tundra";
+  home.homeDirectory = "/home/tundra";
   home.stateVersion = "25.05";
   programs.home-manager.enable = true;
 
@@ -23,7 +26,6 @@
     bitwarden obsidian libreoffice vlc lollypop
     tutanota-desktop yubioath-flutter prismlauncher
     nextcloud-client
-    jetbrains-toolbox
     davmail
     gnome-online-accounts
     bibata-cursors
@@ -31,10 +33,10 @@
     everforest-gtk-theme
   ];
 
+  # Artix-specific shell aliases
   programs.zsh.shellAliases = {
-    rb = "sudo nixos-rebuild switch --flake /etc/nixos#laptop --impure";
-    nixos-rebuild = "sudo nixos-rebuild switch --flake /etc/nixos#laptop --impure";
-    nixos-update = "cd /etc/nixos && sudo nix flake update && sudo nixos-rebuild switch --flake .#laptop --impure";
+    hms = "home-manager switch --flake ~/.config/nix-config#artix";
+    hmu = "cd ~/.config/nix-config && nix flake update && home-manager switch --flake .#artix";
   };
 
   programs.zsh.initContent = lib.mkOrder 600 ''
@@ -44,11 +46,11 @@
 
     update-all() {
         echo "Updating Nix flake..."
-        cd /etc/nixos
-        sudo nix flake update
+        cd ~/.config/nix-config
+        nix flake update
 
-        echo "Rebuilding NixOS system..."
-        sudo nixos-rebuild switch --flake /etc/nixos#laptop --impure
+        echo "Switching Home Manager..."
+        home-manager switch --flake ~/.config/nix-config#artix
     }
   '';
 
@@ -220,7 +222,7 @@
       ];
 
       # Keybindings use colemak logical key names so physical positions match
-      # the original hyprland code: bindings (e.g. physical T = colemak G).
+      # the original hyprland config (e.g. physical T key = colemak G).
       binds = with config.lib.niri.actions; {
         # App launchers
         "Mod+G".action = spawn "kitty";           # physical T key
@@ -303,7 +305,7 @@
         margin = "5px 10px 0px 10px";
         modules-left = [ "niri/workspaces" "niri/window" ];
         modules-center = [ "clock" ];
-        modules-right = [ "mpris" "custom/printer" "pulseaudio" "network" "cpu" "memory" "battery" "tray" ];
+        modules-right = [ "mpris" "pulseaudio" "network" "cpu" "memory" "battery" "tray" ];
 
         "niri/workspaces" = {
           format = "{name}";
@@ -398,8 +400,7 @@
       #network,
       #pulseaudio,
       #mpris,
-      #tray,
-      #mpris {
+      #tray {
         padding: 0 12px;
         margin: 3px;
         background-color: rgba(131, 192, 146, 0.7);
