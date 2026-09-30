@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: DeterminateSystems/nix-installer-action@v19
+      - uses: DeterminateSystems/nix-installer-action@v23
       - uses: DeterminateSystems/magic-nix-cache-action@v8
       - name: Validate repository and evaluate all systems
         run: nix shell nixpkgs#shellcheck --command ./scripts/validate.sh --all
@@ -33,7 +33,7 @@ jobs:
         host: [laptop, mini1, mini2, beattie, desktop]
     steps:
       - uses: actions/checkout@v4
-      - uses: DeterminateSystems/nix-installer-action@v19
+      - uses: DeterminateSystems/nix-installer-action@v23
       - uses: DeterminateSystems/magic-nix-cache-action@v8
       - name: Build ${{ matrix.host }} without activation
         run: nix build --no-link ".#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel"
@@ -47,7 +47,7 @@ jobs:
         host: [mini1, mini2]
     steps:
       - uses: actions/checkout@v4
-      - uses: DeterminateSystems/nix-installer-action@v19
+      - uses: DeterminateSystems/nix-installer-action@v23
       - uses: DeterminateSystems/magic-nix-cache-action@v8
       - name: Build Home Manager activation package
         run: nix build --no-link ".#homeConfigurations.${{ matrix.host }}.activationPackage"
@@ -57,7 +57,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: DeterminateSystems/nix-installer-action@v19
+      - uses: DeterminateSystems/nix-installer-action@v23
       - uses: DeterminateSystems/magic-nix-cache-action@v8
       - name: Evaluate macOS system derivation without cross-building
         run: nix eval --raw '.#darwinConfigurations.macbook.system.drvPath'
