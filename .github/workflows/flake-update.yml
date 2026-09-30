@@ -24,7 +24,7 @@ jobs:
       - name: Evaluate all outputs
         run: nix flake check --all-systems --no-build
       - name: Open or update pull request
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: 'chore: update flake inputs'
