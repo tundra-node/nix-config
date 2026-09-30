@@ -18,7 +18,7 @@ jobs:
     name: Evaluate all flake outputs
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: DeterminateSystems/nix-installer-action@v19
       - uses: DeterminateSystems/magic-nix-cache-action@v8
       - name: Validate repository and evaluate all systems
@@ -32,7 +32,7 @@ jobs:
       matrix:
         host: [laptop, mini1, mini2, beattie, desktop]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: DeterminateSystems/nix-installer-action@v19
       - uses: DeterminateSystems/magic-nix-cache-action@v8
       - name: Build ${{ matrix.host }} without activation
@@ -46,7 +46,7 @@ jobs:
       matrix:
         host: [mini1, mini2]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: DeterminateSystems/nix-installer-action@v19
       - uses: DeterminateSystems/magic-nix-cache-action@v8
       - name: Build Home Manager activation package
@@ -56,7 +56,7 @@ jobs:
     name: Evaluate Darwin output
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: DeterminateSystems/nix-installer-action@v19
       - uses: DeterminateSystems/magic-nix-cache-action@v8
       - name: Evaluate macOS system derivation without cross-building
